@@ -85,7 +85,10 @@ after_bundle do
   end
 
   generate('flipper:setup') if install_flipper
-  rails_command('console1984:install:migrations') if literally_1984
+  if literally_1984
+    rails_command('console1984:install:migrations')
+    rails_command('audits1984:install:migrations')
+  end
 
   file '.rubocop.yml', <<~RUBOCOP
     inherit_gem:
