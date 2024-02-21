@@ -28,6 +28,15 @@ gem 'paranoia'
 
 gem 'view_component'
 
+gem 'platform_agent'
+
+literally_1984 = yes?('Is it 1984? (y/n)')
+
+if literally_1984
+  gem 'audits1984'
+  gem 'console1984'
+end
+
 gem_group :development, :test do
   gem 'awesome_print'
 
@@ -76,6 +85,7 @@ after_bundle do
   end
 
   generate('flipper:setup') if install_flipper
+  generate('console1984:install:migrations') if literally_1984
 
   file '.rubocop.yml', <<~RUBOCOP
     inherit_gem:
@@ -115,9 +125,14 @@ after_bundle do
   inside('app/models') do
     file 'current.rb', <<~CURRENT
       class Current < ActiveSupport::CurrentAttributes
-        attribute :user
+        attribute :user, :platform
       end
     CURRENT
+
+    file 'application_platform.rb', <<~PLATFORM
+      class ApplicationPlatform < PlatformAgent
+      end
+    PLATFORM
   end
 
   unless use_sorcery
@@ -193,4 +208,7 @@ after_bundle do
   rails_command('db:prepare') if yes?('Do you want the DB created? (y/n)')
 
   puts 'MAKE SURE TO DO THE DEVISE STUFF' unless use_sorcery
+
+  puts 'Things to do after: '
+  ' -'
 end
