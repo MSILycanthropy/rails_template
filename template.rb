@@ -207,8 +207,10 @@ after_bundle do
 
   rails_command('db:prepare') if yes?('Do you want the DB created? (y/n)')
 
-  puts 'MAKE SURE TO DO THE DEVISE STUFF' unless use_sorcery
-
   puts 'Things to do after: '
-  ' -'
+  puts ' - Setup Current with platform and user in ApplicationController'
+  puts ' - Setup authentication in ApplicationController'
+  puts ' - Setup console1984 and audits194'
+  puts ' - Do devise stuff' unless use_sorcery
+  puts ' - Have fun coding ;)'
 end
