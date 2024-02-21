@@ -135,9 +135,9 @@ after_bundle do
       name: "Ruby on Rails CI"
       on:
         push:
-          branches: [ "master" ]
+          branches: [ "main" ]
         pull_request:
-          branches: [ "master" ]
+          branches: [ "main" ]
       jobs:
         test:
           runs-on: ubuntu-latest
@@ -158,7 +158,7 @@ after_bundle do
               uses: actions/checkout@v3
             # Add or replace dependency steps here
             - name: Install Ruby and gems
-              uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+              uses: ruby/setup-ruby@v1.171.0
               with:
                 bundler-cache: true
             # Add or replace database setup steps here
@@ -174,16 +174,16 @@ after_bundle do
             - name: Checkout code
               uses: actions/checkout@v3
             - name: Install Ruby and gems
-              uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+              uses: ruby/setup-ruby@v1.171.0
               with:
                 bundler-cache: true
             # Add or replace any other lints here
             - name: Security audit dependencies
-              run: bin/bundler-audit --update
+              run: bundle exec bundle-audit --update
             - name: Security audit application code
-              run: bin/brakeman -q -w2
+              run: bundle exec brakeman -q -w2
             - name: Lint Ruby files
-              run: bin/rubocop --parallel
+              run: bundle exec rubocop --parallel
     GITHUB
   end
 
