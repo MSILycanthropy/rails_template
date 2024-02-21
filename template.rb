@@ -122,7 +122,7 @@ after_bundle do
   ERB_LINT
 
   file '.envrc', <<~ENVRC
-    RUBY_DEBUG_IRB_CONSOLE=1
+    export RUBY_DEBUG_IRB_CONSOLE=1
   ENVRC
 
   inside('app/models') do
