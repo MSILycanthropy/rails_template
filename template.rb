@@ -81,7 +81,7 @@ after_bundle do
       end
     SORCERY
 
-    generate('sorcery:install', 'remember_me', 'reset_password', 'external')
+    generate('sorcery:install')
   end
 
   generate('flipper:setup') if install_flipper
