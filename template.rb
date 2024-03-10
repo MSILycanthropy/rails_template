@@ -68,19 +68,6 @@ after_bundle do
   generate('audited:install')
 
   if use_sorcery
-    initializer 'sorcery_active_record_patch.rb', <<~SORCERY
-      # frozen_string_literal: true
-
-      # TODO: Remove this when Sorcery merges https://github.com/Sorcery/sorcery/pull/352
-      class ActiveRecord::Base
-        class << self
-          def timestamped_migrations
-            ActiveRecord.timestamped_migrations
-          end
-        end
-      end
-    SORCERY
-
     generate('sorcery:install')
   end
 
